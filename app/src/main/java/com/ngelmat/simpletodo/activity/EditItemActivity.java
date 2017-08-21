@@ -23,7 +23,7 @@ public class EditItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
-        todoService = new TodoServiceImpl();
+        todoService = TodoServiceImpl.create();
 
         etEditItem = (EditText) findViewById(R.id.etEditItem);
         editItem = getIntent().getParcelableExtra("edit_item");

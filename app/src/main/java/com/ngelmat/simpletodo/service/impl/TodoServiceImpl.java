@@ -10,6 +10,10 @@ import java.util.List;
 
 public class TodoServiceImpl implements TodoService {
 
+    public static TodoServiceImpl create() {
+        return new TodoServiceImpl();
+    }
+
     @Override
     public void insert(TodoItem todoItem) {
         TodoItemTable todoItemTable = new TodoItemTable(todoItem.getItem());

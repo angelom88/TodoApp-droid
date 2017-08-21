@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lvItems = (ListView) findViewById(R.id.lvItems);
-        todoService = new TodoServiceImpl();
+        todoService = TodoServiceImpl.create();
         items =  todoService.selectAll();
         todoItemsAdapter = new TodoItemsAdapter(this, items);
 
@@ -46,9 +46,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int pos, long id) {
                 TodoItem todoItem = items.get(pos);
                 todoService.delete(todoItem);
-                items.clear();
-                items.addAll(todoService.selectAll());
-                todoItemsAdapter.notifyDataSetChanged();
+                loadItems();
+
                 return true;
             }
         });
@@ -67,13 +66,11 @@ public class MainActivity extends AppCompatActivity {
     public void onAddItem(View view) {
         String itemText = etNewItem.getText().toString().trim();
         if (!itemText.isEmpty()) {
-            TodoItem todoItem = new TodoItem(itemText);
+            TodoItem todoItem = TodoItem.create(itemText);
             todoService.insert(todoItem);
-            items.clear();
-            items.addAll(todoService.selectAll());
-            todoItemsAdapter.notifyDataSetChanged();
-
             etNewItem.setText("");
+            loadItems();
+
             Toast.makeText(this, "Successfully added", Toast.LENGTH_SHORT).show();
         }
     }
@@ -81,13 +78,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (RESULT_OK == resultCode && EDIT_REQUEST_CODE == requestCode) {
-            items.clear();
-            items.addAll(todoService.selectAll());
-            todoItemsAdapter.notifyDataSetChanged();
+            loadItems();
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void loadItems() {
+        items.clear();
+        items.addAll(todoService.selectAll());
+        todoItemsAdapter.notifyDataSetChanged();
+    }
 
 }

@@ -10,7 +10,12 @@ public class TodoItem implements Parcelable {
     private UUID id;
     private String item;
 
-    public TodoItem(String item) {
+
+    public static TodoItem create(String item) {
+        return new TodoItem(item);
+    }
+
+    private TodoItem(String item) {
         this.item = item;
     }
 
