@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 TodoItem todoItem = items.get(pos);
                 todoService.delete(todoItem);
                 loadItems();
-
+                Toast.makeText(MainActivity.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
