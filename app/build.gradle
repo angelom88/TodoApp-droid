@@ -17,19 +17,19 @@ android {
   }
   productFlavors {}
   compileOptions {}
-  buildToolsVersion '25.0.1'
+  buildToolsVersion '28.0.3'
 }
 
 def dbflow_version = "4.0.3"
 
 dependencies {
-  compile fileTree(include: ['*.jar'], dir: 'libs')
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
   //DBFlow
   annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
-  compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
-  compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
-  testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:23.0.0'
-  compile 'com.android.support.constraint:constraint-layout:1.0.2'
-  androidTestCompile 'junit:junit:4.12'
+  implementation "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+  implementation "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+  testImplementation 'junit:junit:4.12'
+  implementation 'com.android.support:appcompat-v7:23.0.0'
+  implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+  androidTestImplementation 'junit:junit:4.12'
 }
